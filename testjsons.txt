@@ -1,0 +1,12 @@
+{
+"date":1500000000,
+"user":"aaa@aaa.com",
+"readingList":[{
+    "readingType":"CPU_Tctl",
+    "value":50.5
+    },{
+     "readingType":"CPU_Tdie",
+      "value":30.4
+
+    }]
+}

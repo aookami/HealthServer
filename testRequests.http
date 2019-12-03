@@ -1,0 +1,54 @@
+POST http://localhost:8080/users/create
+Content-Type: application/json
+
+{
+  "email": "heey2",
+  "passkey":"passkeya"
+}
+
+###
+
+POST http://localhost:8080/users/delete
+Content-Type: application/json
+
+{"id":6}
+
+
+###with date
+
+POST http://localhost:8080/readings/new_collection
+Content-Type: application/json
+
+{
+  "date":1500000000,
+  "user":{"email": "aaa@aaa.xd"},
+  "readingList":[
+    {
+      "readingType":"CPU_Tctl",
+      "value":50.5
+    },
+    {
+      "readingType":"CPU_Tdie",
+      "value":30.4
+    }
+  ]
+}
+###no date
+
+POST http://localhost:8080/readings/new_collection
+Content-Type: application/json
+
+{
+  "user":{"email": "aaa@aaa.xd"},
+  "readingList":[
+    {
+      "readingType":"CPU_Tctl",
+      "value":50.5
+    },
+    {
+      "readingType":"CPU_Tdie",
+      "value":30.4
+    }
+  ]
+}
+###

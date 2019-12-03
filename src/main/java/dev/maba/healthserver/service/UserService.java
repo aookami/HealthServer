@@ -11,7 +11,6 @@ public class UserService {
     UserRepository userRepository;
 
     public void createUser(String email, String password) {
-        System.out.println("AAsd");
         userRepository.createUser(email, password);
     }
 

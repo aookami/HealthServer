@@ -1,0 +1,1 @@
+ALTER TABLE healthserver.readings RENAME COLUMN result_collection_id TO reading_colllection_id;

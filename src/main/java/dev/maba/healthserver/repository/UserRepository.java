@@ -19,5 +19,5 @@ public interface UserRepository
     @Query(value = "INSERT INTO healthserver.users (email, passkey) VALUES (?1, ?2)", nativeQuery = true)
     public void createUser(String email, String password);
 
-    public User getUserById(Integer id);
+    public User getUserById(Long id);
 }
