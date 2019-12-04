@@ -39,15 +39,15 @@ POST http://localhost:8080/readings/new_collection
 Content-Type: application/json
 
 {
-  "user":{"email": "aaa@aaa.xd"},
+  "user":{"email": "amo"},
   "readingList":[
     {
       "readingType":"CPU_Tctl",
-      "value":50.5
+      "value":510.5
     },
     {
       "readingType":"CPU_Tdie",
-      "value":30.4
+      "value":320.4
     }
   ]
 }

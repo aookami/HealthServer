@@ -20,4 +20,6 @@ public interface UserRepository
     public void createUser(String email, String password);
 
     public User getUserById(Long id);
+
+    public User getUserByEmail(String email);
 }

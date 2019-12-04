@@ -16,7 +16,16 @@ public class ReadingCollection {
 
     Date date;
 
-    @OneToMany(targetEntity=Reading.class, mappedBy = "id")
+    public List<Reading> getReadingList() {
+        return readingList;
+    }
+
+    public void setReadingList(List<Reading> readingList) {
+        this.readingList = readingList;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="reading_collection_id", referencedColumnName = "id")
     List<Reading> readingList;
 
     @ManyToOne(targetEntity = User.class)
@@ -24,6 +33,11 @@ public class ReadingCollection {
 
     public Integer getId() {
         return id;
+    }
+
+    public ReadingCollection(Date date, User user) {
+        this.date = date;
+        this.user = user;
     }
 
     public void setId(Integer id) {
@@ -38,9 +52,6 @@ public class ReadingCollection {
         this.date = date;
     }
 
-    public void setReadingList(List<Reading> readingList) {
-        this.readingList = readingList;
-    }
 
     public User getUser() {
         return user;
@@ -51,12 +62,5 @@ public class ReadingCollection {
     }
 
 
-    public List<Reading> getReadingList(){
-        return readingList;
-    }
-
-    public void addReadingToList(Reading reading){
-        readingList.add(reading);
-    }
 
 }

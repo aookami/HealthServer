@@ -1,5 +1,7 @@
 package dev.maba.healthserver.model;
 
+import org.springframework.data.annotation.Reference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,6 +17,9 @@ public class Reading {
     Long id;
     String readingType;
     Float value;
+
+    @Column(name="reading_collection_id")
+    Long readingCollectionId;
 
 
     public Long getId() {
@@ -40,6 +45,9 @@ public class Reading {
     public void setValue(Float value) {
         this.value = value;
     }
+
+
+
 
 
 }
