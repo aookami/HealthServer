@@ -52,3 +52,13 @@ Content-Type: application/json
   ]
 }
 ###
+
+
+###
+
+GET http://localhost:8080/readings/get_collections*userId=1&startTimestamp=0&endTimestamp=0&readingType=CPU_Tdie
+
+###
+GET http://localhost:8080/readings/test
+
+###

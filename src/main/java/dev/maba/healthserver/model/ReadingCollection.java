@@ -14,6 +14,11 @@ public class ReadingCollection {
     @Column(name="id")
     Integer id;
 
+    public ReadingCollection() {
+       super();
+    }
+
+    @Column(name="date")
     Date date;
 
     public List<Reading> getReadingList() {

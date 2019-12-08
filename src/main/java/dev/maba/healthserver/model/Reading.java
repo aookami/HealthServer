@@ -15,7 +15,9 @@ public class Reading {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     Long id;
+    @Column(name="reading_type")
     String readingType;
+    @Column(name="value")
     Float value;
 
     @Column(name="reading_collection_id")

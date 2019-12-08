@@ -6,12 +6,11 @@ import dev.maba.healthserver.model.User;
 import dev.maba.healthserver.repository.ReadingCollectionRepository;
 import dev.maba.healthserver.repository.ReadingRepository;
 import dev.maba.healthserver.repository.UserRepository;
+import dev.maba.healthserver.service.ReadingCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.List;
@@ -29,28 +28,37 @@ public class ReadingCollectionController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ReadingCollectionService readingCollectionService;
+
 
     @PostMapping("/new_collection")
     public ReadingCollection createReadingCollection(@RequestBody ReadingCollection readingCollection){
-        if(readingCollection.getDate() == null){
-            readingCollection.setDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
-        }
+         return readingCollectionService.saveNewCollection(readingCollection);
 
-        User user = userRepository.getUserByEmail(readingCollection.getUser().getEmail());
+    }
 
-        readingCollection.setUser(user);
+    @GetMapping("/get_collections")
+    public List<ReadingCollection> getCollectionsBetweenDates(@RequestParam("userId") Long userId,
+                                                              @RequestParam("startTimestamp") Long startTimestamp,
+                                                              @RequestParam("endTimestamp") Long endTimestamp,
+                                                              @RequestParam("readingType") String readingType){
 
+       List<ReadingCollection> readingCollectionList =  readingCollectionService.getReadingCollectionsInTimeframe(Timestamp.from(Instant.ofEpochMilli(startTimestamp)), Timestamp.from(Instant.ofEpochMilli(endTimestamp)),
+                userRepository.getUserById(userId));
 
-        ReadingCollection saved = readingCollectionRepository.saveAndFlush(readingCollection);
-        System.out.println("saved id " + saved.getId());
-        List<Reading> readingList = readingCollection.getReadingList();
+        System.out.println(readingCollectionList);
+        return readingCollectionList;
+    }
 
-        readingList.forEach(reading -> {
-            System.out.println(reading);
-            readingRepository.save(reading);
-        });
+    @GetMapping("/test")
+    public List<ReadingCollection> testCc(){
+        List<ReadingCollection> readingCollectionList =  readingCollectionService.getReadingCollectionsInTimeframe(Timestamp.from(Instant.ofEpochMilli(15000l)), Timestamp.from(Instant.ofEpochMilli(15000000000000l)),
+                userRepository.getUserById(1l));
+        System.out.println(Timestamp.from(Instant.ofEpochMilli(15000000000000l)));
+        System.out.println(Timestamp.from(Instant.ofEpochMilli(15000l)));
 
-        saved.setReadingList(readingList);
-        return saved;
+        System.out.println(readingCollectionList);
+        return readingCollectionList;
     }
 }
