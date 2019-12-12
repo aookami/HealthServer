@@ -41,8 +41,7 @@ public class ReadingCollectionController {
     @GetMapping("/get_collections")
     public List<ReadingCollection> getCollectionsBetweenDates(@RequestParam("userId") Long userId,
                                                               @RequestParam("startTimestamp") Long startTimestamp,
-                                                              @RequestParam("endTimestamp") Long endTimestamp,
-                                                              @RequestParam("readingType") String readingType){
+                                                              @RequestParam("endTimestamp") Long endTimestamp){
 
        List<ReadingCollection> readingCollectionList =  readingCollectionService.getReadingCollectionsInTimeframe(Timestamp.from(Instant.ofEpochMilli(startTimestamp)), Timestamp.from(Instant.ofEpochMilli(endTimestamp)),
                 userRepository.getUserById(userId));
